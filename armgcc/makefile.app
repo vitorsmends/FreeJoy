@@ -17,7 +17,12 @@ OPT = -O2
 # paths
 #######################################
 # Build path
+MOCK_INPUTS ?= 0
+ifeq ($(MOCK_INPUTS),1)
+BUILD_DIR = build/app-mock
+else
 BUILD_DIR = build/app
+endif
 
 ######################################
 # source
@@ -125,7 +130,8 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DUSE_STDPERIPH_DRIVER \
--DSTM32F10X_MD
+-DSTM32F10X_MD \
+-DFREEJOY_MOCK_INPUTS=$(MOCK_INPUTS)
 
 
 # AS includes

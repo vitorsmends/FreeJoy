@@ -9,6 +9,11 @@
 #ifndef __COMMON_DEFINES_H__
 #define __COMMON_DEFINES_H__
 
+// Enable only for USB integration testing without external inputs.
+#ifndef FREEJOY_MOCK_INPUTS
+#define FREEJOY_MOCK_INPUTS 0
+#endif
+
 //#define DEBUG
 
 #define FIRMWARE_VERSION					0x1731			// v1.7.3b1

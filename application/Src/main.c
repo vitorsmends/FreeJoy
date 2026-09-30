@@ -57,6 +57,14 @@ int main(void)
 	
 	SysTick_Init();
 	
+#if FREEJOY_MOCK_INPUTS
+	// Use a RAM-only profile; do not overwrite the saved hardware configuration.
+	dev_config = init_config;
+	for (uint8_t i = 0; i < 16; i++)
+	{
+		dev_config.buttons[i].physical_num = i;
+	}
+#else
 	// getting configuration from flash memory
 	DevConfigGet(&dev_config);
 	
@@ -66,6 +74,7 @@ int main(void)
 		DevConfigSet((dev_config_t *) &init_config);
 		DevConfigGet(&dev_config);
 	}
+#endif
 	AppConfigInit(&dev_config);
 	
 USB_HW_Init();

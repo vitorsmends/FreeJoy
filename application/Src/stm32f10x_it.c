@@ -40,6 +40,9 @@
 #include "as5600.h"
 #include "config.h"
 #include "uart.h"
+#if FREEJOY_MOCK_INPUTS
+#include "mock_inputs.h"
+#endif
 
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
@@ -209,6 +212,14 @@ void TIM2_IRQHandler(void)
 		{
 			joy_millis = millis;
 				
+#if FREEJOY_MOCK_INPUTS
+			MockInputsGenerate(millis, joy_report.axis_data, joy_report.button_data);
+			memcpy(params_report.raw_axis_data, joy_report.axis_data, sizeof(joy_report.axis_data));
+			memcpy(params_report.log_button_data, joy_report.button_data, sizeof(joy_report.button_data));
+			memcpy(params_report.phy_button_data, joy_report.button_data, sizeof(joy_report.button_data));
+			params_report.shift_button_data = 0;
+			memset(joy_report.pov_data, 0xFF, sizeof(joy_report.pov_data));
+#else
 			// getting fresh data to joystick report buffer
 			ButtonsGet(joy_report.button_data, 
 								 params_report.log_button_data, 
@@ -216,6 +227,7 @@ void TIM2_IRQHandler(void)
 								 &params_report.shift_button_data);
 			AnalogGet(joy_report.axis_data, NULL, params_report.raw_axis_data);	
 			POVsGet(joy_report.pov_data);
+#endif
 			
 			// fill joystick report buffer
 			report_buf[pos++] = REPORT_ID_JOY;			

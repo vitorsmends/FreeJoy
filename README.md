@@ -6,6 +6,9 @@ FreeJoy is a widely configurable game device controller based on the cheap STM32
 
 ## Getting started
 
+Para testar a integração USB com uma STM32 sem circuito de eixos ou botões,
+veja o [modo de entradas simuladas](docs/mock-inputs.md).
+
 See [our wiki](https://github.com/FreeJoy-Team/FreeJoyWiki) for instructions on how to flash firmware to your board and how to configure the device for your application.
 
 ## Features
