@@ -6,6 +6,8 @@ FreeJoy is a widely configurable game device controller based on the cheap STM32
 
 ## Getting started
 
+Para **NUCLEO-L476RG**, há um [joystick USB simplificado com dados simulados](firmware/nucleo-l476rg/README.md), independente do firmware FreeJoy para STM32F103.
+
 Para testar a integração USB com uma STM32 sem circuito de eixos ou botões,
 veja o [modo de entradas simuladas](docs/mock-inputs.md).
 
